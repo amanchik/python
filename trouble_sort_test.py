@@ -22,6 +22,38 @@ def permutations(iterable, r=None):
                 break
         else:
             return
-x = permutations(['E','E','R','H','T'],5)
-for a in x:
-    print ''.join(a)
+#t = int(raw_input()) # read a line with a single integer
+def trouble_sort(L):
+    done = False
+    while not done:
+        done = True
+        for i in range(0,len(L)-2):
+            if L[i] > L[i+2]:
+                done = False
+                save = L[i]
+                L[i] = L[i+2]
+                L[i+2] = save
+    return  L
+def get_index(all_ints):
+    right_sort = [s for s in all_ints]
+    right_sort.sort()
+    troubled = trouble_sort(all_ints)
+    ans  = -1
+    for j in range(len(all_ints)):
+      if troubled[j] != right_sort[j]:
+          ans = j
+          break
+    return ans
+
+tracks = permutations(range(1,5))
+all_ans = []
+for track in tracks:
+   # print track
+    ans = get_index(list(track))
+    if ans != -1  :
+        print trouble_sort(list(track))
+        print ans
+
+
+
+
