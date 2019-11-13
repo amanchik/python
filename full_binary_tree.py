@@ -1,5 +1,7 @@
+import sys
+sys.setrecursionlimit(1500)
 t = int(raw_input()) # read a line with a single integer
-import numpy as np
+#import numpy as np
 
 def num_children(root,s,e,a_matrix,children):
     children[root][s] = 1
@@ -27,8 +29,11 @@ def num_to_delete(root,s,e,a_matrix,children,to_delete):
         if u != e :
             del_chil.append((children[root][u],to_delete[root][u]))
             total_chil += children[root][u]
-    sorted_del_chil = sorted(del_chil)
-    sorted_del_chil = list(reversed(sorted_del_chil))
+    
+    del_chil.sort(key=lambda k: (k[0], -k[1]), reverse=True)
+    sorted_del_chil = del_chil
+   # sorted_del_chil = sorted(del_chil)
+   # sorted_del_chil = list(reversed(sorted_del_chil))
 
     if len(sorted_del_chil) == 1 :
         to_delete[root][s] = sorted_del_chil[0][0]
@@ -57,6 +62,7 @@ for i in xrange(1, t + 1):
         a_matrix[a].append(b)
         a_matrix[b].append(a)
 
+   
     for root in a_matrix:
         num_children(root,root,0,a_matrix,children)
         num_to_delete(root,root,0,a_matrix,children,to_delete)
@@ -66,10 +72,12 @@ for i in xrange(1, t + 1):
         if to_delete[j][j] < ans:
             ans = to_delete[j][j]
 
-    if i==8:
-        pass
-       # print original
-       # print a_matrix
+    
+        
+     #   print ""
+        
+     #   print children[22]
+     #   print to_delete[22]
        # print np.matrix(children)
        # print np.matrix(to_delete)
 
