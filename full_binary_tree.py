@@ -30,7 +30,7 @@ def num_to_delete(root,s,e,a_matrix,children,to_delete):
             del_chil.append((children[root][u],to_delete[root][u]))
             total_chil += children[root][u]
     
-    del_chil.sort(key=lambda k: (k[0], -k[1]), reverse=True)
+    del_chil.sort(key=lambda k: k[0]-k[1], reverse=True)
     sorted_del_chil = del_chil
    # sorted_del_chil = sorted(del_chil)
    # sorted_del_chil = list(reversed(sorted_del_chil))
